@@ -103,7 +103,9 @@ export async function connect() {
       'Informe o número do bot (SP/RJ exigem 9º dígito). \nExemplo: "+5511912345678", demais estados: "+554112345678":',
     );
 
-    const phoneNumber = await question("Número: ");
+    // BURLA PARA A RENDER: Tenta ler a variável de ambiente primeiro, se não existir abre a pergunta
+    const phoneNumber = process.env.PHONE_NUMBER || process.env.NUMERO_BOT || await question("Número: ");
+
 
     if (!phoneNumber) {
       errorLog(
