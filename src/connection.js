@@ -127,6 +127,12 @@ export async function connect() {
       const error = lastDisconnect?.error;
       const statusCode = error?.output?.statusCode;
 
+      // BURLA: Se o bot fechou a conexão apenas para esperar o código de pareamento, NÃO REINICIE!
+      if (!socket.authState.creds.registered && statusCode !== DisconnectReason.loggedOut) {
+        infoLog("Aguardando digitação do código de pareamento no celular...");
+        return; 
+      }
+
       if (
         error?.message?.includes("Bad MAC") ||
         error?.toString()?.includes("Bad MAC")
@@ -149,7 +155,7 @@ export async function connect() {
       }
 
       if (statusCode === DisconnectReason.loggedOut) {
-        errorLog("Bot desconectado!");
+        errorLog("Bot desconectado definitivamente!");
       } else {
         switch (statusCode) {
           case DisconnectReason.badSession:
@@ -209,6 +215,9 @@ O prefixo padrão definido no config.js é ${PREFIX}`,
       infoLog("Atualizando conexão...");
     }
   });
+
+
+
 
   socket.ev.on("creds.update", saveCreds);
 
