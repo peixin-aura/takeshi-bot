@@ -115,9 +115,13 @@ export async function connect() {
       process.exit(1);
     }
 
+    // Dá um tempo de 3 segundos para a conexão estabilizar na nuvem antes de pedir o código
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
     const code = await socket.requestPairingCode(onlyNumbers(phoneNumber));
 
     console.log(`Código de pareamento: ${formatPairingCode(code)}`);
+
   }
 
   socket.ev.on("connection.update", async (update) => {
