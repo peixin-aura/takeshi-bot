@@ -72,13 +72,13 @@
  * Não modifique nada abaixo, a não ser que saiba o que está fazendo!
  */
 /* mudanças pra burlar o render*/ 
-
-const express = require('express');
+import express from 'express';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => res.send('Bot Online! 🚀'));
 app.listen(PORT, () => console.log(`Servidor HTTP ativo na porta ${PORT}`));
+
 
 
 import { connect } from "./connection.js";
