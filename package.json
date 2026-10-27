@@ -23,6 +23,7 @@
     "baileys": "7.0.0-rc14",
     "correios-brasil": "^3.0.6",
     "express": "^5.2.1",
+    "ffmpeg": "^1.1.3",
     "node-cache": "^5.1.2",
     "node-webpmux": "^3.2.1",
     "openai": "^6.33.0",
